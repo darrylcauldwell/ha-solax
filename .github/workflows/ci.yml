@@ -23,9 +23,7 @@ jobs:
           python-version: '3.13'
 
       - name: Install dependencies
-        run: |
-          pip install git+https://github.com/darrylcauldwell/aiosolax.git
-          pip install homeassistant pytest pytest-asyncio
+        run: pip install aiosolax homeassistant pytest pytest-asyncio
 
       - name: Run tests
         run: PYTHONPATH=. pytest tests/ -v
