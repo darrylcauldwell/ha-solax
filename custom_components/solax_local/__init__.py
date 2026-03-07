@@ -4,18 +4,13 @@ from __future__ import annotations
 
 import logging
 
-from aiosolax import (
-    SolaxClient,
-    SolaxConnectionError,
-    SolaxError,
-)
+from aiosolax import SolaxClient
 
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
-from .const import CONF_HOST, CONF_PASSWORD, CONF_PORT, CONF_USERNAME, DEFAULT_PORT, DOMAIN
+from .const import CONF_HOST, CONF_PASSWORD, CONF_PORT, CONF_USERNAME, DEFAULT_PORT
 from .coordinator import (
     SolaxLocalConfigEntry,
     SolaxLocalCoordinator,
@@ -40,17 +35,12 @@ async def async_setup_entry(
         session=session,
     )
 
-    try:
-        info, _data = await client.get_data()
-    except (SolaxConnectionError, SolaxError) as err:
-        raise ConfigEntryNotReady from err
-
     coordinator = SolaxLocalCoordinator(hass, entry, client)
     await coordinator.async_config_entry_first_refresh()
 
     entry.runtime_data = SolaxLocalRuntimeData(
         coordinator=coordinator,
-        info=info,
+        info=coordinator.info,
     )
 
     entry.async_on_unload(entry.add_update_listener(_async_options_updated))

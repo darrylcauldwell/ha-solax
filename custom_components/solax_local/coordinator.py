@@ -39,6 +39,7 @@ class SolaxLocalCoordinator(DataUpdateCoordinator[InverterData]):
     """Coordinator for fetching SolaX inverter data."""
 
     config_entry: SolaxLocalConfigEntry
+    info: InverterInfo | None = None
 
     def __init__(
         self,
@@ -61,7 +62,8 @@ class SolaxLocalCoordinator(DataUpdateCoordinator[InverterData]):
     async def _async_update_data(self) -> InverterData:
         """Fetch data from the SolaX dongle."""
         try:
-            _info, data = await self.client.get_data()
+            info, data = await self.client.get_data()
+            self.info = info
             return data
         except SolaxAllZeroError:
             if self.data is not None:
