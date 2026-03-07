@@ -1,0 +1,13 @@
+{
+  "domain": "solax_local",
+  "name": "SolaX Local",
+  "codeowners": ["@darrylcauldwell"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/darrylcauldwell/ha-solax",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/darrylcauldwell/ha-solax/issues",
+  "quality_scale": "bronze",
+  "requirements": ["aiosolax==0.1.0"],
+  "version": "0.1.0"
+}

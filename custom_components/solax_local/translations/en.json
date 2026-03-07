@@ -1,0 +1,62 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to SolaX Inverter",
+        "description": "Enter the IP address and password (dongle serial number) for your SolaX PocketWiFi dongle.",
+        "data": {
+          "host": "Host",
+          "password": "Password (dongle serial)",
+          "port": "Port",
+          "username": "Username (optional)"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid credentials",
+      "cannot_connect": "Cannot connect to dongle",
+      "timeout": "Connection timed out",
+      "inverter_offline": "Inverter is offline (all-zero response)",
+      "unsupported_model": "Unsupported inverter model",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This inverter is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "SolaX Local Options",
+        "data": {
+          "update_interval": "Update interval (seconds)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "grid_voltage": { "name": "Grid voltage" },
+      "grid_current": { "name": "Grid current" },
+      "grid_power": { "name": "Grid power" },
+      "grid_frequency": { "name": "Grid frequency" },
+      "pv1_voltage": { "name": "PV1 voltage" },
+      "pv1_current": { "name": "PV1 current" },
+      "pv1_power": { "name": "PV1 power" },
+      "pv2_voltage": { "name": "PV2 voltage" },
+      "pv2_current": { "name": "PV2 current" },
+      "pv2_power": { "name": "PV2 power" },
+      "battery_voltage": { "name": "Battery voltage" },
+      "battery_current": { "name": "Battery current" },
+      "battery_power": { "name": "Battery power" },
+      "battery_temperature": { "name": "Battery temperature" },
+      "battery_soc": { "name": "Battery state of charge" },
+      "inverter_temperature": { "name": "Inverter temperature" },
+      "grid_power_io": { "name": "Grid import/export" },
+      "total_pv_energy": { "name": "Total PV energy" },
+      "total_feed_in_energy": { "name": "Total feed-in energy" },
+      "total_consumption": { "name": "Total consumption" },
+      "today_pv_energy": { "name": "Today PV energy" }
+    }
+  }
+}

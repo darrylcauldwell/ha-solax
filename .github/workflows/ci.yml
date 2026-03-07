@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - 'custom_components/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - '.github/workflows/*.yml'
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install homeassistant aiosolax pytest pytest-asyncio
+
+      - name: Run tests
+        run: PYTHONPATH=. pytest tests/ -v
+
+      - name: Validate manifest
+        run: python -c "import json; m = json.load(open('custom_components/solax_local/manifest.json')); assert m['domain'] == 'solax_local'; assert m['config_flow'] == True; print('Manifest OK')"
+
+      - name: Validate strings
+        run: python -c "import json; s = json.load(open('custom_components/solax_local/strings.json')); assert 'config' in s; assert 'entity' in s; print('Strings OK')"
