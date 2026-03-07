@@ -20,11 +20,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.13'
 
       - name: Install dependencies
         run: |
-          pip install homeassistant aiosolax pytest pytest-asyncio
+          pip install git+https://github.com/darrylcauldwell/aiosolax.git
+          pip install homeassistant pytest pytest-asyncio
 
       - name: Run tests
         run: PYTHONPATH=. pytest tests/ -v
