@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass
 from datetime import timedelta
 import logging
@@ -58,9 +59,15 @@ class SolaxLocalCoordinator(DataUpdateCoordinator[InverterData]):
             update_interval=timedelta(seconds=interval),
         )
         self.client = client
+        self._update_lock = asyncio.Lock()
 
     async def _async_update_data(self) -> InverterData:
         """Fetch data from the SolaX dongle."""
+        async with self._update_lock:
+            return await self._do_update()
+
+    async def _do_update(self) -> InverterData:
+        """Perform the actual data fetch (must be called under lock)."""
         try:
             info, data = await self.client.get_data()
             self.info = info

@@ -58,5 +58,11 @@
       "total_consumption": { "name": "Total consumption" },
       "today_pv_energy": { "name": "Today PV energy" }
     }
+  },
+  "exceptions": {
+    "inverter_offline": { "message": "Inverter is offline" },
+    "timeout_error": { "message": "Connection to inverter timed out" },
+    "connection_error": { "message": "Cannot connect to inverter" },
+    "update_error": { "message": "Error updating data: {error}" }
   }
 }
