@@ -18,3 +18,4 @@ venv/
 credentials.json
 serviceAccountKey.json
 api_key.json
+.claude/
